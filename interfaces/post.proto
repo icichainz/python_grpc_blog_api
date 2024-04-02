@@ -1,0 +1,53 @@
+syntax="proto3";
+
+package post;
+
+
+service PostService {
+ // Create a new post
+ rpc CreatePost (CreatePostRequest) returns (PostResponse){}
+
+ // Get a post by ID
+ rpc GetPost(GetPostRequest) returns (Post){}
+
+ // Update post 
+ rpc UpdatePost (UpdatePostRequest) returns (PostResponse);
+
+ // Get a list of all posts.
+ rpc ListPosts(ListPostRequest) returns (ListPostsResponse);
+}
+
+// create post  request serializer
+message CreatePostRequest {
+    string title = 1;
+    string content = 2;
+}
+
+// get post serializer
+message GetPostRequest {
+    int32 id = 1 ;
+}
+
+// update post  request serializer
+message UpdatePostRequest {
+    int32 id = 1 ;
+    string title = 2 ;
+    string content = 3 ;
+}
+// get  post list  request serializer
+
+message ListPostRequest {}
+
+message Post{
+    int32 id = 1 ;
+    string title = 2 ;
+    string content = 3 ;
+}
+
+message PostResponse {
+    string message = 1 ;
+}
+
+message ListPostsResponse {
+    repeated Post posts = 1 ;
+}
